@@ -7,5 +7,18 @@
 </head>
 <body>
     <h1>Testing</h1>
+    
+
+    {% comment %} for loop in django templating language {% endcomment %}
+    {% for fruit in fruits %}
+        <p>{{fruit.name}}</p>
+
+        {% comment %} If statement in django temlating language {% endcomment %}
+        {% if fruit.isReadyToEat%}
+        <p>Fruit is ready to Eat!</p>
+        {% else%}
+        <p>Not Ready to eat</p>
+        {% endif%}
+    {% endfor%}
 </body>
 </html>

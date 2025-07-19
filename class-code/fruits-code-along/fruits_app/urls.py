@@ -20,4 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls'))
+
+    # create a view function called about_me()
+    # should return an about.html file with your name
+    # add the views function to your urls.py
 ]

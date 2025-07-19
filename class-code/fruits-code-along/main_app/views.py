@@ -2,7 +2,13 @@ from django.shortcuts import render
 
 # Create your views here.
 def test_route(request):
-    return render(request, 'testing.html')
+    fruits = [
+        {"name":"Orange", "isReadyToEat":False},
+        {"name":"Pineapple", "isReadyToEat":True},
+        {"name":"Watermelon", "isReadyToEat":False}
+        ]
+    return render(request, 'testing.html',{"fruits":fruits})
+
 
 
 # set up a route
