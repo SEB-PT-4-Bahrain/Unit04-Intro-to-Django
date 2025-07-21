@@ -12,11 +12,11 @@ def test_route(request):
     return render(request, 'testing.html',{"fruits":fruits})
 
 
-def all_fruits(request):
+# def all_fruits(request):
         
-        fruits = Fruit.objects.all() #method to get all fruits
+#         fruits = Fruit.objects.all() #method to get all fruits
         
-        return render(request,"all-fruits.html",{"fruits":fruits})
+#         return render(request,"all-fruits.html",{"fruits":fruits})
 
 def show_fruit(request,id):
       fruit = Fruit.objects.get(id =id)
@@ -41,10 +41,37 @@ def delete_fruit(request,id):
 
 def edit_fruit(request,id):
       fruit = Fruit.objects.get(id=id)
-      return render(request,"update-fruit.html")
+      return render(request,"update-fruit.html",{"fruit":fruit})
+
+def update_fruit(request,id):
+      fruit = Fruit.objects.get(id = id)
+      if request.method == "POST":
+            fruit.name = request.POST['name']
+            fruit.is_ready_to_eat = "isReadyToEat" in request.POST
+            fruit.save()
+            return redirect("/fruits")
 
 # set up a route
 
 # 1. create a view function
 # 2. create the html file that corresponds
 # 3. add the view in the urls.py
+
+
+
+
+# class based views
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+class FruitListView(ListView):
+      model = Fruit
+      template_name = "all-fruits.html"
+      context_object_name = "fruits"
+
+
+
+class FruitCreateView(CreateView):
+      model = Fruit
+      template_name = "all-fruits.html"
+      fields = ["name","is_ready_to_eat"]
+      success_url = "/fruits"
