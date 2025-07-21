@@ -6,6 +6,19 @@
     <title>Document</title>
 </head>
 <body>
+
+    <form action="/fruits/create/" method="post">
+        {% csrf_token%}
+        <label for="name">Name:</label>
+        <input name="name" id="name" type="text" placeholder="name:">
+
+        <label for="isReadyToEat">Ready to eat?</label>
+        <input name="isReadyToEat" id="isReadyToEat" type="checkbox" placeholder="Ready to eat?">
+
+        <button>Create fruit</button>
+
+    </form>
+
     {% for fruit in fruits%}
         <h2>{{fruit.name}}</h2>
         <a href="/fruits/{{fruit.id}}">Fruit details</a>

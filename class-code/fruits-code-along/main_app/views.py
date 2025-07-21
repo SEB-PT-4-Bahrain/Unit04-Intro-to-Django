@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Fruit
 
 # Create your views here.
@@ -20,7 +20,28 @@ def all_fruits(request):
 
 def show_fruit(request,id):
       fruit = Fruit.objects.get(id =id)
-      return render(request,'show-fruit.html',{fruit})
+      return render(request,'show-fruit.html',{"fruit":fruit})
+
+
+def create_fruit(request):
+      if request.method == "POST":
+            print("isReadyToEat" in request.POST)
+            name = request.POST['name']
+            is_ready_to_eat = "isReadyToEat" in request.POST
+
+            # save to the database
+            Fruit.objects.create(name=name, is_ready_to_eat=is_ready_to_eat)
+            return redirect("/fruits/")
+
+
+def delete_fruit(request,id):
+      fruit = Fruit.objects.get(id=id)
+      fruit.delete() #deletes a fruit from the database
+      return redirect("/fruits")
+
+def edit_fruit(request,id):
+      fruit = Fruit.objects.get(id=id)
+      return render(request,"update-fruit.html")
 
 # set up a route
 
